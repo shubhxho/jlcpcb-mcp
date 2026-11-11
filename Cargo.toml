@@ -2,7 +2,7 @@
 name = "jlcpcb-mcp"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.88"
+rust-version = "1.89"
 authors = ["shubhxho"]
 license = "MIT"
 description = "MCP server for finding and evaluating JLCPCB / LCSC electronic components for PCB assembly"

@@ -85,7 +85,9 @@ show("estimate_pcb_quote 100x80 2L x10", call("estimate_pcb_quote", {"width_mm":
 show("service_status", call("service_status", {}))
 show("error: bad part number", call("get_component_details", {"lcsc": "not-a-part"}))
 show("error: unknown part", call("get_component_details", {"lcsc": "C999999999"}))
-show("error: ambiguous category", call("search_components", {"query": "x", "category": "capacitor"}))
+show("error: ambiguous category", call("search_components", {"query": "100nF", "category": "mlcc"}))
+show("search basic+preferred, category by partial name", call("search_components", {"query": "AMS1117", "category": "LDO", "basic_only": True, "include_preferred": True, "max_results": 3}),
+     lambda d: {**{k: d[k] for k in ("filters", "total_matches", "returned")}, "results": [brief(c) for c in d["results"]]})
 
 proc.stdin.close()
 proc.wait(timeout=10)
