@@ -1061,3 +1061,86 @@ fn rows_to_summaries(rows: Vec<jlc::SearchRow>, qty: u64) -> Vec<ComponentSummar
         .filter_map(|r| r.into_summary(qty))
         .collect()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn node(name: &str, children: &[&str]) -> CategoryNode {
+        CategoryNode {
+            name: name.into(),
+            id: 1,
+            count: 10,
+            children: children
+                .iter()
+                .map(|c| CategoryNode {
+                    name: (*c).into(),
+                    id: 2,
+                    count: 5,
+                    children: vec![],
+                })
+                .collect(),
+        }
+    }
+
+    fn tree() -> Vec<CategoryNode> {
+        vec![
+            node(
+                "Capacitors",
+                &[
+                    "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+                    "Multilayer Ceramic Capacitors MLCC - Leaded",
+                    "Tantalum Capacitors",
+                ],
+            ),
+            node("Resistors", &["Chip Resistor - Surface Mount"]),
+        ]
+    }
+
+    #[test]
+    fn resolves_parent_leaf_plural_and_substring() {
+        let t = tree();
+        assert_eq!(
+            resolve_category(&t, "resistors").unwrap(),
+            ("Resistors".into(), None)
+        );
+        assert_eq!(
+            resolve_category(&t, "resistor").unwrap(),
+            ("Resistors".into(), None)
+        );
+        assert_eq!(
+            resolve_category(&t, "tantalum").unwrap(),
+            ("Capacitors".into(), Some("Tantalum Capacitors".into()))
+        );
+        assert_eq!(
+            resolve_category(&t, "Chip Resistor - Surface Mount").unwrap(),
+            (
+                "Resistors".into(),
+                Some("Chip Resistor - Surface Mount".into())
+            )
+        );
+        assert!(matches!(
+            resolve_category(&t, "mlcc"),
+            Err(ApiError::InvalidInput(m)) if m.contains("ambiguous")
+        ));
+        assert!(matches!(
+            resolve_category(&t, "flux capacitor drive"),
+            Err(ApiError::NotFound(_))
+        ));
+    }
+
+    #[test]
+    fn mpn_stem_extraction() {
+        assert_eq!(mpn_stem("AMS1117-3.3").as_deref(), Some("AMS1117"));
+        assert_eq!(mpn_stem("LM1/2"), None);
+    }
+
+    #[test]
+    fn package_splitting() {
+        assert_eq!(
+            split_packages(Some("SOT-23-3, SOT-23 ,")),
+            vec!["SOT-23-3".to_string(), "SOT-23".to_string()]
+        );
+        assert!(split_packages(None).is_empty());
+    }
+}

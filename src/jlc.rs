@@ -581,7 +581,12 @@ impl JlcClient {
             page_size: 1,
             ..Default::default()
         };
-        parse_search(self.http.post_json(SERVICE, &url, &q.to_body(), None).await?).map(|_| ())
+        parse_search(
+            self.http
+                .post_json(SERVICE, &url, &q.to_body(), None)
+                .await?,
+        )
+        .map(|_| ())
     }
 
     /// Find the search row for an exact part code (gives the Preferred flag).

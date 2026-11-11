@@ -65,7 +65,10 @@ fn parses_detail_record() {
     assert_eq!(d.summary.lcsc, "C6186");
     assert_eq!(d.summary.mfr_part.as_deref(), Some("AMS1117-3.3"));
     assert_eq!(d.summary.package.as_deref(), Some("SOT-223"));
-    assert_eq!(d.summary.category.as_deref(), Some("Power Management (PMIC)"));
+    assert_eq!(
+        d.summary.category.as_deref(),
+        Some("Power Management (PMIC)")
+    );
     assert_eq!(d.summary.library_type, LibraryType::Basic);
     assert_eq!(d.summary.attr("Output Voltage"), Some("3.3V"));
     assert_eq!(d.assembly_process.as_deref(), Some("SMT"));
