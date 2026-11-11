@@ -2,3 +2,4 @@
 *.swp
 .env
 /dist
+/site/jlcpcb-mcp-guide.pdf

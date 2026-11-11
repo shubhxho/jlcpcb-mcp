@@ -1,0 +1,400 @@
+{
+ "captured_at": "11 Nov 2026, 16:50 IST",
+ "server_info": {
+  "name": "jlcpcb-mcp",
+  "title": "JLCPCB / LCSC parts",
+  "version": "0.1.0"
+ },
+ "protocol_version": "2025-06-18",
+ "tools": [
+  {
+   "name": "estimate_pcb_quote",
+   "description": "ROUGH bare-PCB fabrication cost estimate from size, layers, quantity, thickness and finish. This is an approximate parametric model with documented assumptions, NOT an official JLCPCB quote (JLCPCB has no public pricing API); always confirm at https://cart.jlcpcb.com/quote.",
+   "args": [
+    "height_mm",
+    "layers",
+    "quantity",
+    "surface_finish",
+    "thickness_mm",
+    "width_mm"
+   ]
+  },
+  {
+   "name": "get_component_details",
+   "description": "Full live details for one LCSC part number (e.g. \"C25744\"): JLCPCB assembly stock and price breaks, LCSC retail stock and price breaks, Basic/Preferred/Extended class, parameters, datasheet URL, image, MSL and assembly process.",
+   "args": [
+    "lcsc",
+    "quantity"
+   ]
+  },
+  {
+   "name": "list_categories",
+   "description": "List JLCPCB component categories with live part counts. With no arguments returns top-level categories; use `parent` or `search` (e.g. \"mosfet\") to see sub-categories. Names can be passed as `category` to search_components.",
+   "args": [
+    "include_subcategories",
+    "parent",
+    "search"
+   ]
+  },
+  {
+   "name": "search_components",
+   "description": "Search JLCPCB/LCSC parts live by keyword and filters. Results are ranked Basic first, then Preferred, then Extended, then by JLCPCB assembly stock (desc), then unit price (asc). Example: {\"query\": \"10k\", \"category\": \"Resistors\", \"package\": \"0402\", \"basic_only\": true}.",
+   "args": [
+    "basic_only",
+    "category",
+    "include_preferred",
+    "max_results",
+    "min_stock",
+    "package",
+    "quantity",
+    "query"
+   ]
+  },
+  {
+   "name": "service_status",
+   "description": "Check that the live JLCPCB and LCSC endpoints are reachable, whether official API credentials are configured, and cache size. Useful when other tools report network errors.",
+   "args": []
+  },
+  {
+   "name": "suggest_alternatives",
+   "description": "Suggest cheaper, better-stocked or Basic-library substitutes for an LCSC part: same category, same package (by default) and same value (resistance/capacitance/inductance/frequency/output voltage), with ratings at least as good. Each suggestion lists its reasons.",
+   "args": [
+    "basic_or_preferred_only",
+    "lcsc",
+    "max_results",
+    "min_stock",
+    "quantity",
+    "same_package"
+   ]
+  }
+ ],
+ "samples": [
+  {
+   "tool": "search_components",
+   "args": {
+    "query": "10k",
+    "category": "Resistors",
+    "package": "0402",
+    "max_results": 4
+   },
+   "output": {
+    "filters": {
+     "category": "Resistors",
+     "library": "any",
+     "min_stock": 1,
+     "packages": [
+      "0402"
+     ],
+     "price_qty": 100,
+     "query": "10k",
+     "subcategory": null
+    },
+    "total_matches": 192,
+    "returned": 4,
+    "results": [
+     {
+      "lcsc": "C25744",
+      "mfr_part": "0402WGF1002TCE",
+      "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+      "package": "0402",
+      "library_type": "basic",
+      "jlc_stock": 20655411,
+      "unit_price_usd": 0.001,
+      "price_qty": 100
+     },
+     {
+      "lcsc": "C60489",
+      "mfr_part": "RC0402JR-0710KL",
+      "manufacturer": "YAGEO",
+      "package": "0402",
+      "library_type": "extended",
+      "jlc_stock": 21834214,
+      "unit_price_usd": 0.0019,
+      "price_qty": 100
+     },
+     {
+      "lcsc": "C60490",
+      "mfr_part": "RC0402FR-0710KL",
+      "manufacturer": "YAGEO",
+      "package": "0402",
+      "library_type": "extended",
+      "jlc_stock": 5740774,
+      "unit_price_usd": 0.0016,
+      "price_qty": 100
+     },
+     {
+      "lcsc": "C174175",
+      "mfr_part": "RCT0210KJLF",
+      "manufacturer": "HKR(Hong Kong Resistors)",
+      "package": "0402",
+      "library_type": "extended",
+      "jlc_stock": 4143877,
+      "unit_price_usd": 0.0008,
+      "price_qty": 100
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_components",
+   "args": {
+    "query": "100nF",
+    "package": "0402",
+    "basic_only": true,
+    "max_results": 3
+   },
+   "output": {
+    "total_matches": 2,
+    "results": [
+     {
+      "lcsc": "C1525",
+      "mfr_part": "CL05B104KO5NNNC",
+      "manufacturer": "Samsung Electro-Mechanics",
+      "package": "0402",
+      "library_type": "basic",
+      "jlc_stock": 31343545,
+      "unit_price_usd": 0.0031,
+      "price_qty": 100
+     },
+     {
+      "lcsc": "C307331",
+      "mfr_part": "CL05B104KB54PNC",
+      "manufacturer": "Samsung Electro-Mechanics",
+      "package": "0402",
+      "library_type": "basic",
+      "jlc_stock": 20494658,
+      "unit_price_usd": 0.0085,
+      "price_qty": 100
+     }
+    ]
+   }
+  },
+  {
+   "tool": "get_component_details",
+   "args": {
+    "lcsc": "C25744"
+   },
+   "output": {
+    "lcsc": "C25744",
+    "mfr_part": "0402WGF1002TCE",
+    "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+    "package": "0402",
+    "category": "Resistors",
+    "subcategory": "Chip Resistor - Surface Mount",
+    "library_type": "basic",
+    "jlc_assembly_stock": 20655411,
+    "lcsc_retail_stock": 0,
+    "price_qty": 100,
+    "jlc_unit_price_usd": 0.001,
+    "assembly_process": "SMT",
+    "moisture_sensitivity_level": null,
+    "datasheet_url": "https://www.lcsc.com/datasheet/lcsc_datasheet_2411221126_UNI-ROYAL-Uniroyal-Elec-0402WGF1002TCE_C25744.pdf",
+    "sources": [
+     "JLCPCB parts detail",
+     "LCSC product detail"
+    ],
+    "warnings": [],
+    "jlc_price_breaks": [
+     {
+      "max_qty": 999,
+      "min_qty": 1,
+      "unit_price_usd": 0.001
+     },
+     {
+      "max_qty": 2999,
+      "min_qty": 1000,
+      "unit_price_usd": 0.0008
+     },
+     {
+      "max_qty": 9999,
+      "min_qty": 3000,
+      "unit_price_usd": 0.0006
+     },
+     "…"
+    ],
+    "attributes": [
+     {
+      "name": "Resistance",
+      "value": "10kΩ"
+     },
+     {
+      "name": "Operating Temperature",
+      "value": "-55℃~+155℃"
+     },
+     {
+      "name": "Power(Watts)",
+      "value": "62.5mW"
+     },
+     {
+      "name": "Type",
+      "value": "Thick Film Resistor"
+     },
+     "…"
+    ]
+   }
+  },
+  {
+   "tool": "suggest_alternatives",
+   "args": {
+    "lcsc": "C25531",
+    "max_results": 3
+   },
+   "output": {
+    "original": {
+     "lcsc": "C25531",
+     "mfr_part": "0402WGJ0103TCE",
+     "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+     "package": "0402",
+     "library_type": "extended",
+     "jlc_stock": 245040,
+     "unit_price_usd": 0.0026,
+     "price_qty": 100
+    },
+    "match_criteria": [
+     "same category: Resistors / Chip Resistor - Surface Mount",
+     "same package: 0402",
+     "same Resistance: 10kΩ",
+     "at least the same voltage/power/current rating, no worse tolerance or dielectric (where parseable)"
+    ],
+    "alternatives": [
+     {
+      "lcsc": "C25744",
+      "mfr_part": "0402WGF1002TCE",
+      "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+      "package": "0402",
+      "library_type": "basic",
+      "jlc_stock": 20655411,
+      "unit_price_usd": 0.001,
+      "price_qty": 100,
+      "reasons": [
+       "Basic part (avoids the extended-part setup fee)",
+       "61.5% cheaper at qty 100",
+       "84.3x the stock (20655411 vs 245040)"
+      ]
+     },
+     {
+      "lcsc": "C174175",
+      "mfr_part": "RCT0210KJLF",
+      "manufacturer": "HKR(Hong Kong Resistors)",
+      "package": "0402",
+      "library_type": "extended",
+      "jlc_stock": 4143877,
+      "unit_price_usd": 0.0008,
+      "price_qty": 100,
+      "reasons": [
+       "69.2% cheaper at qty 100",
+       "16.9x the stock (4143877 vs 245040)"
+      ]
+     },
+     {
+      "lcsc": "C173683",
+      "mfr_part": "RCT0210KFLF",
+      "manufacturer": "HKR(Hong Kong Resistors)",
+      "package": "0402",
+      "library_type": "extended",
+      "jlc_stock": 3578273,
+      "unit_price_usd": 0.0009,
+      "price_qty": 100,
+      "reasons": [
+       "65.4% cheaper at qty 100",
+       "14.6x the stock (3578273 vs 245040)"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "tool": "list_categories",
+   "args": {
+    "search": "mosfet"
+   },
+   "output": {
+    "categories": [
+     {
+      "id": 5,
+      "name": "Transistors/Thyristors",
+      "part_count": 118749,
+      "subcategories": [
+       {
+        "id": 2954,
+        "name": "MOSFETs",
+        "part_count": 76199
+       }
+      ],
+      "subcategory_count": 11
+     },
+     {
+      "id": 66,
+      "name": "Silicon Carbide (SiC) Devices",
+      "part_count": 5231,
+      "subcategories": [
+       {
+        "id": 2090,
+        "name": "Silicon Carbide Field Effect Transistor (MOSFET)",
+        "part_count": 2429
+       }
+      ],
+      "subcategory_count": 3
+     }
+    ],
+    "total_categories": 2
+   }
+  },
+  {
+   "tool": "estimate_pcb_quote",
+   "args": {
+    "width_mm": 100,
+    "height_mm": 80,
+    "quantity": 10,
+    "layers": 2
+   },
+   "output": {
+    "is_official_quote": false,
+    "method": "approximate parametric model (not a JLCPCB quote)",
+    "low_usd": 9.75,
+    "typical_usd": 13.0,
+    "high_usd": 19.5,
+    "per_board_typical_usd": 1.3,
+    "breakdown": [
+     {
+      "item": "engineering/setup (2L)",
+      "usd": 5.0
+     },
+     {
+      "item": "area cost 80.0 cm² × 10 @ $0.010/cm² × volume factor 1.00",
+      "usd": 8.0
+     }
+    ],
+    "official_quote_url": "https://cart.jlcpcb.com/quote"
+   }
+  },
+  {
+   "tool": "service_status",
+   "args": {},
+   "output": {
+    "version": "0.1.0",
+    "jlcpcb_parts_api": {
+     "detail": "reachable (live search probe)",
+     "latency_ms": 345,
+     "ok": true
+    },
+    "lcsc_api": {
+     "detail": "reachable",
+     "latency_ms": 145,
+     "ok": true
+    },
+    "official_api_configured": false
+   }
+  }
+ ],
+ "errors": [
+  {
+   "isError": true,
+   "message": "part C999999999 was not found at JLCPCB or LCSC"
+  },
+  {
+   "isError": true,
+   "message": "invalid input: category \"mlcc\" is ambiguous (2 matches). Use one of: Multilayer Ceramic Capacitors MLCC - Leaded (in Capacitors); Multilayer Ceramic Capacitors MLCC - SMD/SMT (in Capacitors)"
+  }
+ ]
+}
