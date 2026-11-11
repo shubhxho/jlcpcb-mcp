@@ -90,7 +90,7 @@ nav .links{{display:flex;gap:20px;margin-left:auto;font-size:14px}}nav .links a{
 .hero{{position:relative;padding:96px 0 72px;overflow:hidden}}
 .hero:before{{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 18% 10%,rgba(16,185,129,.18),transparent 70%),radial-gradient(500px 260px at 85% 30%,rgba(56,189,248,.10),transparent 70%);pointer-events:none}}
 .hero:after{{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:44px 44px;opacity:.25;mask-image:linear-gradient(#000,transparent 85%);-webkit-mask-image:linear-gradient(#000,transparent 85%);pointer-events:none}}
-.hero .wrap{{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}}
+.hero .wrap{{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:48px;align-items:center}}
 .eyebrow{{font:600 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--acc2)}}
 h1{{font-size:56px;line-height:1.05;margin:16px 0 18px;letter-spacing:-.03em}}
 h1 span{{background:linear-gradient(90deg,var(--acc2),#38bdf8);-webkit-background-clip:text;background-clip:text;color:transparent}}
@@ -103,7 +103,7 @@ h1 span{{background:linear-gradient(90deg,var(--acc2),#38bdf8);-webkit-backgroun
 .term{{background:#0b1016;border:1px solid var(--line);border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.45);overflow:hidden}}
 .term .bar{{display:flex;gap:7px;padding:12px 14px;border-bottom:1px solid var(--line);align-items:center}}
 .term .bar b{{width:11px;height:11px;border-radius:50%;background:#2a3441}}.term .bar em{{margin-left:10px;font:12px var(--mono);color:var(--mut);font-style:normal}}
-.term pre{{margin:0;padding:18px 18px;white-space:pre-wrap;word-break:break-word;font:12.5px/1.6 var(--mono);color:#cfe3d8;overflow:auto}}
+.term pre{{margin:0;padding:18px 18px;white-space:pre-wrap;overflow-wrap:anywhere;font:12.5px/1.6 var(--mono);color:#cfe3d8;overflow:auto}}
 .term .p{{color:var(--acc2)}}.term .c{{color:#6b7a8c}}
 section{{padding:72px 0;border-top:1px solid var(--line)}}
 h2{{font-size:34px;letter-spacing:-.02em;margin:0 0 10px}}.sub{{color:var(--mut);margin:0 0 34px;max-width:720px}}
@@ -114,7 +114,7 @@ h2{{font-size:34px;letter-spacing:-.02em;margin:0 0 10px}}.sub{{color:var(--mut)
 .tool>p{{color:#c3cdd8;margin:12px 0 10px;font-size:15px}}
 .args{{font-size:13px;color:var(--mut)}}.args span{{margin-right:6px}}.args code{{background:#0b1016;border:1px solid var(--line);border-radius:5px;padding:1px 6px;margin:0 3px 4px 0;display:inline-block;color:#cbd5e1}}
 .call{{margin-top:10px;font-size:13px;color:var(--mut)}}.call .k{{font:600 11px var(--mono);color:var(--warn);text-transform:uppercase}}.call code{{color:#e2e8f0}}
-pre{{white-space:pre-wrap;word-break:break-word;background:#0b1016;border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow:auto;font:12.5px/1.55 var(--mono);color:#cfd8e3;margin:10px 0 0}}
+pre{{white-space:pre-wrap;overflow-wrap:anywhere;background:#0b1016;border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow:auto;font:12.5px/1.55 var(--mono);color:#cfd8e3;margin:10px 0 0}}
 pre.out{{max-height:340px}}pre.err code{{color:#fca5a5}}
 .note{{font-size:14px;color:var(--mut);margin-top:18px}}
 .grid2{{display:grid;grid-template-columns:1fr 1fr;gap:20px}}
