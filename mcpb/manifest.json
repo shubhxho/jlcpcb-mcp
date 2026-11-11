@@ -1,0 +1,74 @@
+{
+  "manifest_version": "0.3",
+  "name": "jlcpcb-mcp",
+  "display_name": "JLCPCB / LCSC Parts",
+  "version": "0.1.0",
+  "description": "Find and evaluate JLCPCB/LCSC parts for PCB assembly: live search, stock, prices, alternatives.",
+  "long_description": "Live parametric search of the JLCPCB assembly parts library (Basic / Preferred / Extended), live JLCPCB assembly stock and LCSC retail stock with price breaks, datasheets, cheaper or better-stocked substitutes, the category tree, and a clearly-labelled approximate bare-PCB cost model. No credentials required; official JLCPCB API credentials are optional.",
+  "author": {
+    "name": "shubhxho",
+    "url": "https://github.com/shubhxho"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shubhxho/jlcpcb-mcp.git"
+  },
+  "homepage": "https://github.com/shubhxho/jlcpcb-mcp",
+  "support": "https://github.com/shubhxho/jlcpcb-mcp/issues",
+  "license": "MIT",
+  "keywords": ["jlcpcb", "lcsc", "electronics", "pcb", "components", "bom"],
+  "server": {
+    "type": "binary",
+    "entry_point": "server/jlcpcb-mcp",
+    "mcp_config": {
+      "command": "${__dirname}/server/jlcpcb-mcp",
+      "args": [],
+      "env": {
+        "JLCPCB_APP_ID": "${user_config.jlcpcb_app_id}",
+        "JLCPCB_API_KEY": "${user_config.jlcpcb_api_key}",
+        "JLCPCB_API_SECRET": "${user_config.jlcpcb_api_secret}"
+      },
+      "platform_overrides": {
+        "win32": {
+          "command": "${__dirname}/server/jlcpcb-mcp.exe"
+        }
+      }
+    }
+  },
+  "tools": [
+    { "name": "search_components", "description": "Live JLCPCB/LCSC parts search with category, package, Basic-only and stock filters" },
+    { "name": "get_component_details", "description": "Live stock, price breaks, parameters, datasheet and image for an LCSC part" },
+    { "name": "suggest_alternatives", "description": "Cheaper, better-stocked or Basic-library substitutes for a part" },
+    { "name": "list_categories", "description": "JLCPCB category tree with live part counts" },
+    { "name": "estimate_pcb_quote", "description": "Approximate bare-PCB cost model (not an official quote)" },
+    { "name": "service_status", "description": "Upstream reachability and configuration check" }
+  ],
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"]
+  },
+  "user_config": {
+    "jlcpcb_app_id": {
+      "type": "string",
+      "title": "JLCPCB API app id (optional)",
+      "description": "Official JLCPCB Open API app id. Leave empty to use the public endpoints only.",
+      "required": false,
+      "default": ""
+    },
+    "jlcpcb_api_key": {
+      "type": "string",
+      "title": "JLCPCB API access key (optional)",
+      "description": "Official JLCPCB Open API access key.",
+      "sensitive": true,
+      "required": false,
+      "default": ""
+    },
+    "jlcpcb_api_secret": {
+      "type": "string",
+      "title": "JLCPCB API secret (optional)",
+      "description": "Official JLCPCB Open API secret.",
+      "sensitive": true,
+      "required": false,
+      "default": ""
+    }
+  }
+}

@@ -75,6 +75,18 @@ Use the absolute path to the binary if `~/.cargo/bin` isn't on the client's `PAT
 claude mcp add jlcpcb -- jlcpcb-mcp
 ```
 
+### One-click install links
+
+Install the binary first (`cargo install …`), then:
+
+- **Cursor:** [`cursor://anysphere.cursor-deeplink/mcp/install?name=jlcpcb&config=eyJjb21tYW5kIjoiamxjcGNiLW1jcCIsImFyZ3MiOltdfQ%3D%3D`](cursor://anysphere.cursor-deeplink/mcp/install?name=jlcpcb&config=eyJjb21tYW5kIjoiamxjcGNiLW1jcCIsImFyZ3MiOltdfQ%3D%3D)
+  (base64 of `{"command":"jlcpcb-mcp","args":[]}`, per Cursor's MCP install-link format)
+- **VS Code:** `vscode:mcp/install?%7B%22name%22%3A%22jlcpcb%22%2C%22command%22%3A%22jlcpcb-mcp%22%2C%22args%22%3A%5B%5D%7D`
+- **Claude Desktop (no Rust toolchain):** build a bundle with `scripts/build-mcpb.sh` and open the
+  resulting `dist/jlcpcb-mcp-<version>-<os>-<arch>.mcpb` in Claude Desktop. The bundle contains a prebuilt
+  binary for the platform it was built on (manifest: [`mcpb/manifest.json`](mcpb/manifest.json), MCPB
+  manifest v0.3), so build one per OS/arch and attach them to a GitHub release.
+
 ### With official API credentials (optional)
 
 ```json
