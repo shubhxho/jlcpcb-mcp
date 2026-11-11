@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "jlcpcb": {
+      "command": "/home/YOUR_USERNAME/.cargo/bin/jlcpcb-mcp",
+      "args": []
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "jlcpcb": {
+      "command": "jlcpcb-mcp",
+      "args": []
+    }
+  }
+}

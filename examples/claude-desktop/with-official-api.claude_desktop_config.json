@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "jlcpcb": {
+      "command": "/Users/YOUR_USERNAME/.cargo/bin/jlcpcb-mcp",
+      "args": [],
+      "env": {
+        "JLCPCB_APP_ID": "your-app-id",
+        "JLCPCB_API_KEY": "your-access-key",
+        "JLCPCB_API_SECRET": "your-secret",
+        "JLCPCB_MCP_TIMEOUT_SECS": "20",
+        "JLCPCB_MCP_LOG": "warn"
+      }
+    }
+  }
+}

@@ -35,6 +35,19 @@ The server speaks MCP over stdin/stdout; you normally don't run it by hand.
 
 ## Configure your MCP client
 
+Ready-to-copy files live in [`examples/`](examples/):
+
+| Client / OS | Example | Destination |
+|---|---|---|
+| Claude Desktop, macOS | [`examples/claude-desktop/macos.claude_desktop_config.json`](examples/claude-desktop/macos.claude_desktop_config.json) | `~/Library/Application Support/Claude/claude_desktop_config.json` |
+| Claude Desktop, Windows | [`examples/claude-desktop/windows.claude_desktop_config.json`](examples/claude-desktop/windows.claude_desktop_config.json) | `%APPDATA%\Claude\claude_desktop_config.json` |
+| Claude Desktop, Linux (community builds) | [`examples/claude-desktop/linux.claude_desktop_config.json`](examples/claude-desktop/linux.claude_desktop_config.json) | `~/.config/Claude/claude_desktop_config.json` |
+| Claude Desktop + official API | [`examples/claude-desktop/with-official-api.claude_desktop_config.json`](examples/claude-desktop/with-official-api.claude_desktop_config.json) | as above |
+| Cursor, project | [`examples/cursor/project/.cursor/mcp.json`](examples/cursor/project/.cursor/mcp.json) | `<project>/.cursor/mcp.json` |
+| Cursor, global | [`examples/cursor/global/mcp.json`](examples/cursor/global/mcp.json) | `~/.cursor/mcp.json` |
+
+Merge the `"jlcpcb"` entry into an existing `mcpServers` object rather than overwriting the file.
+
 Use the absolute path to the binary if `~/.cargo/bin` isn't on the client's `PATH`
 (e.g. `/Users/you/.cargo/bin/jlcpcb-mcp`, or `C:\\Users\\you\\.cargo\\bin\\jlcpcb-mcp.exe`).
 
