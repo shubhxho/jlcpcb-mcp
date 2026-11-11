@@ -15,6 +15,9 @@ Extended library class, datasheets, and cheaper or better-stocked substitutes.
 > **Unofficial.** This project is not affiliated with JLCPCB or LCSC. The public parts endpoints are
 > undocumented and can change without notice; see [Caveats](#caveats).
 
+A printable guide with live sample outputs is in [`docs/jlcpcb-mcp-guide.pdf`](docs/jlcpcb-mcp-guide.pdf)
+(regenerate with `python3 docs/build_guide.py`; needs network and Chrome/Chromium).
+
 ## Install
 
 Requires Rust 1.89+ (`rustup` recommended).
