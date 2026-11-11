@@ -10,6 +10,7 @@ Extended library class, datasheets, and cheaper or better-stocked substitutes.
   endpoints that power <https://jlcpcb.com/parts>, so stock and prices are current.
 - Optional official JLCPCB API support (`JLCPCB_APP_ID` / `JLCPCB_API_KEY` / `JLCPCB_API_SECRET`).
 - Clear, actionable errors for network failures, timeouts, rate limiting and upstream format changes.
+- MCP Registry name: `mcp-name: io.github.shubhxho/jlcpcb-mcp`
 
 > **Unofficial.** This project is not affiliated with JLCPCB or LCSC. The public parts endpoints are
 > undocumented and can change without notice; see [Caveats](#caveats).
@@ -242,6 +243,15 @@ returns current stock, so this server stays download-free. Responses are cached 
   verified against live credentials by the author; errors are passed through verbatim.
 - **PCB estimates** are a model, not quotes.
 - Be polite: the server rate-limits itself, but avoid issuing large bursts of searches.
+
+## MCP Registry
+
+[`server.json`](server.json) describes this server for the official
+[MCP Registry](https://registry.modelcontextprotocol.io) (schema `2025-12-11`, validated against
+`https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json`). It uses the `cargo`
+package type (`crates.io`, identifier `jlcpcb-mcp`). The registry checks ownership by looking for the
+visible `mcp-name: io.github.shubhxho/jlcpcb-mcp` line in this README on crates.io, so publishing
+order is: `cargo publish` → `mcp-publisher login github` → `mcp-publisher publish`.
 
 ## Development
 

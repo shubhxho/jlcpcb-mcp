@@ -1,0 +1,56 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.shubhxho/jlcpcb-mcp",
+  "title": "JLCPCB / LCSC Parts",
+  "description": "Find and evaluate JLCPCB/LCSC parts for PCB assembly: live search, stock, prices, alternatives.",
+  "repository": {
+    "url": "https://github.com/shubhxho/jlcpcb-mcp",
+    "source": "github"
+  },
+  "websiteUrl": "https://github.com/shubhxho/jlcpcb-mcp#readme",
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "cargo",
+      "registryBaseUrl": "https://crates.io",
+      "identifier": "jlcpcb-mcp",
+      "version": "0.1.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "JLCPCB_APP_ID",
+          "description": "Optional official JLCPCB API app id (enables the official API record in get_component_details; needs all three JLCPCB_* variables)",
+          "isRequired": false,
+          "isSecret": false
+        },
+        {
+          "name": "JLCPCB_API_KEY",
+          "description": "Optional official JLCPCB API access key",
+          "isRequired": false,
+          "isSecret": true
+        },
+        {
+          "name": "JLCPCB_API_SECRET",
+          "description": "Optional official JLCPCB API secret",
+          "isRequired": false,
+          "isSecret": true
+        },
+        {
+          "name": "JLCPCB_MCP_TIMEOUT_SECS",
+          "description": "Per-request timeout in seconds",
+          "isRequired": false,
+          "default": "20",
+          "format": "number"
+        },
+        {
+          "name": "JLCPCB_MCP_LOG",
+          "description": "Log filter for stderr (error, warn, info, debug)",
+          "isRequired": false,
+          "default": "warn"
+        }
+      ]
+    }
+  ]
+}
